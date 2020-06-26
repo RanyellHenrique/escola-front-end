@@ -1,3 +1,4 @@
+import { StudentService } from './../../services/domain/students.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public studentsService: StudentService
+    ) { }
 
   ngOnInit(): void {
+    this.studentsService.findAll()
+      .subscribe(res => {
+        console.log(res);
+      }, err => {});
   }
+
+
 
 }
