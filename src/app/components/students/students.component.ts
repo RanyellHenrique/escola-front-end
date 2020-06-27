@@ -1,5 +1,6 @@
 import { StudentService } from './../../services/domain/students.service';
 import { Component, OnInit } from '@angular/core';
+import { StudentDTO } from '../../model/student.dto';
 
 @Component({
   selector: 'app-students',
@@ -8,14 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentsComponent implements OnInit {
 
+  students: StudentDTO[];
+
   constructor(
     public studentsService: StudentService
     ) { }
 
   ngOnInit(): void {
-    this.studentsService.findAll()
+    this.studentsService.findPerPage(0, 10)
       .subscribe(res => {
-        console.log(res);
+        this.students = res.content;
+      }, err => {});
+  }
+
+  search(event: any): void{
+    this.studentsService.findPerPageAndName(0, 10, event.target.value)
+      .subscribe(res =>{
+        this.students = res.content;
       }, err => {});
   }
 
