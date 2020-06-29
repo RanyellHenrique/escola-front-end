@@ -1,6 +1,6 @@
-<div class="row students col-12 col-md-10">
-  <form class="example-form col-12">
-    <mat-form-field class="example-full-width col-12 col-md-6">
+<div class="row students justify-content-center">
+  <form class="example-form col-md-8 col-12">
+    <mat-form-field class="example-full-width col-12 col-md-12">
       <mat-label>Name Student</mat-label>
       <input matInput placeholder="Ex. Lucas" name="name" (keyup)="search($event)">
     </mat-form-field>
@@ -8,7 +8,7 @@
 </div>
 
 
-<div class="row students">
+<div class="row students justify-content-center">
   <mat-card *ngFor="let e of students" class="col-12 col-sm-6 col-md-4 col-lg-3 card" tabindex="0">
     <mat-card-header>
       <div mat-card-avatar>
@@ -22,3 +22,11 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<div class="row">
+  <mat-paginator [length]="96"
+      [pageSize]="12"
+      [pageSizeOptions]="[6, 12, 24, 96]" class="col-12">
+  </mat-paginator>
+</div>
+

@@ -1,11 +1,11 @@
 .card{
   margin: 0.5rem;
 }
-
 .students{
-  margin: 1.5rem;
+  padding: 1rem;
 }
 
 .icon {
   font-size: 3rem;
 }
+

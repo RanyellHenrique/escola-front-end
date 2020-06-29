@@ -16,15 +16,15 @@ export class StudentsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.studentsService.findPerPage(0, 10)
+    this.studentsService.findPerPage(0, 12)
       .subscribe(res => {
         this.students = res.content;
       }, err => {});
   }
 
   search(event: any): void{
-    this.studentsService.findPerPageAndName(0, 10, event.target.value)
-      .subscribe(res =>{
+    this.studentsService.findPerPageAndName(0, 12, event.target.value)
+      .subscribe(res => {
         this.students = res.content;
       }, err => {});
   }

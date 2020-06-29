@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,8 @@ import { StudentsComponent } from './components/students/students.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { StudentService } from './services/domain/students.service';
+import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { StudentService } from './services/domain/students.service';
     MainNavComponent,
     StudentsComponent,
     HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -39,10 +43,12 @@ import { StudentService } from './services/domain/students.service';
     MatListModule,
     MatCardModule,
     HttpClientModule,
-    MatInputModule
+    MatInputModule,
+    MatPaginatorModule
   ],
   providers: [
-    StudentService
+    StudentService,
+    ErrorInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })
