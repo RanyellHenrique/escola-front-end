@@ -22,6 +22,9 @@ import { HomeComponent } from './components/home/home.component';
 import { StudentService } from './services/domain/students.service';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { LoginComponent } from './components/login/login.component';
+import { AuthService } from './services/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   declarations: [
@@ -44,11 +47,15 @@ import { LoginComponent } from './components/login/login.component';
     MatCardModule,
     HttpClientModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     StudentService,
-    ErrorInterceptorProvider
+    ErrorInterceptorProvider,
+    AuthService,
+    StorageService
   ],
   bootstrap: [AppComponent]
 })
