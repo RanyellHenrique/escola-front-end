@@ -1,3 +1,4 @@
+import { AuthInterceptorProvider } from './../interceptors/auth-interceptor';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -53,9 +54,10 @@ import { StorageService } from './services/storage.service';
   ],
   providers: [
     StudentService,
+    AuthInterceptorProvider,
     ErrorInterceptorProvider,
     AuthService,
-    StorageService
+    StorageService,
   ],
   bootstrap: [AppComponent]
 })

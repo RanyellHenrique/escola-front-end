@@ -24,4 +24,8 @@ export class StudentService{
       return this.http.get<PageResponse>(`${API_CONFIG.base_url}/alunos/page/search?search=${name}&page=${page}&linesPerPage=${lines}`);
     }
 
+    findByEmail(email: string): Observable<StudentDTO>{
+      return this.http.get<StudentDTO>(`${API_CONFIG.base_url}/alunos/email?value=${email}`);
+    }
+
 }

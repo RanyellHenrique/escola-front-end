@@ -17,6 +17,14 @@
         <mat-icon color="primary" class="material-icons v-middle icon" appRed >people</mat-icon>
         Students
       </a>
+      <a mat-list-item routerLink="/">
+        <mat-icon color="primary" class="material-icons v-middle icon" appRed >book</mat-icon>
+        Courses
+      </a>
+      <a mat-list-item class="logout" color="primary" routerLink="/">
+        <mat-icon color="primary" class="material-icons v-middle icon" appRed >logout</mat-icon>
+        Logout
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -29,7 +37,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>school</span>
+      <span class="col-9">school</span>
     </mat-toolbar>
     <div class="container-fluid content">
       <router-outlet></router-outlet>
