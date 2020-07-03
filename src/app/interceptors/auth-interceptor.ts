@@ -1,9 +1,8 @@
-import { API_CONFIG } from './../app/config/api.config';
-import { StorageService } from './../app/services/storage.service';
+import { API_CONFIG } from '../config/api.config';
+import { StorageService } from '../services/storage.service';
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable} from 'rxjs';
 
 
 @Injectable()

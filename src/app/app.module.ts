@@ -1,10 +1,7 @@
-import { AuthInterceptorProvider } from './../interceptors/auth-interceptor';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,18 +11,28 @@ import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MainNavComponent } from './components/template/main-nav/main-nav.component';
 import { AppComponent } from './app.component';
-import { StudentsComponent } from './components/students/students.component';
-import { HomeComponent } from './components/home/home.component';
+import { StudentsComponent } from './components/template/students/students.component';
+import { HomeComponent } from './components/template/home/home.component';
+import { StudentDetailsComponent } from './components/template/student-details/student-details.component';
+import { CoursesComponent } from './components/template/courses/courses.component';
+import { LoginComponent } from './components/template/login/login.component';
 
-import { StudentService } from './services/domain/students.service';
-import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
-import { LoginComponent } from './components/login/login.component';
-import { AuthService } from './services/auth.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StorageService } from './services/storage.service';
+import { StudentService } from './services/domain/students.service';
+import { AuthService } from './services/auth.service';
+import { CourseService } from './services/domain/course.service';
+
+import { AuthInterceptorProvider } from './interceptors/auth-interceptor';
+import { ErrorInterceptorProvider } from '../app/interceptors/error-interceptor';
+import { reducers, metaReducers } from './reducers';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +40,9 @@ import { StorageService } from './services/storage.service';
     MainNavComponent,
     StudentsComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    CoursesComponent,
+    StudentDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +59,11 @@ import { StorageService } from './services/storage.service';
     MatInputModule,
     MatPaginatorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    MatTableModule
   ],
   providers: [
     StudentService,
@@ -58,6 +71,7 @@ import { StorageService } from './services/storage.service';
     ErrorInterceptorProvider,
     AuthService,
     StorageService,
+    CourseService
   ],
   bootstrap: [AppComponent]
 })

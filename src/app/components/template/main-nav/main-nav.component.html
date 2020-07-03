@@ -17,11 +17,11 @@
         <mat-icon color="primary" class="material-icons v-middle icon" appRed >people</mat-icon>
         Students
       </a>
-      <a mat-list-item routerLink="/">
+      <a mat-list-item routerLink="/courses">
         <mat-icon color="primary" class="material-icons v-middle icon" appRed >book</mat-icon>
         Courses
       </a>
-      <a mat-list-item class="logout" color="primary" routerLink="/">
+      <a mat-list-item class="logout" color="primary" routerLink="/" (click)="logout()">
         <mat-icon color="primary" class="material-icons v-middle icon" appRed >logout</mat-icon>
         Logout
       </a>

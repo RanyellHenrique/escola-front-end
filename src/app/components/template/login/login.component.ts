@@ -1,5 +1,5 @@
-import { AuthService } from './../../services/auth.service';
-import { CredentialsDTO } from './../../model/credentials';
+import { AuthService } from '../../../services/auth.service';
+import { CredentialsDTO } from '../../../models/credentials';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 

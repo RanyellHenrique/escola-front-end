@@ -1,9 +1,9 @@
-import { StudentDTO } from './../../model/student.dto';
+import { StudentDTO } from './../../models/student.dto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {API_CONFIG} from '../../config/api.config';
 import { Observable } from 'rxjs';
-import { PageResponse } from '../../model/students.page';
+import { PageStudents } from '../../models/students.page';
 
 @Injectable()
 export class StudentService{
@@ -16,16 +16,20 @@ export class StudentService{
       return this.http.get<StudentDTO[]>(`${API_CONFIG.base_url}/alunos`);
     }
 
-    findPerPage(page: number, lines: number ): Observable<PageResponse>{
-      return this.http.get<PageResponse>(`${API_CONFIG.base_url}/alunos/page?page=${page}&linesPerPage=${lines}`);
+    findPerPage(page: number = 0, lines: number = 24 ): Observable<PageStudents>{
+      return this.http.get<PageStudents>(`${API_CONFIG.base_url}/alunos/page?page=${page}&linesPerPage=${lines}`);
     }
 
-    findPerPageAndName(page: number, lines: number, name: string ): Observable<PageResponse>{
-      return this.http.get<PageResponse>(`${API_CONFIG.base_url}/alunos/page/search?search=${name}&page=${page}&linesPerPage=${lines}`);
+    findPerPageAndName(page: number = 0, lines: number = 24, name: string ): Observable<PageStudents>{
+      return this.http.get<PageStudents>(`${API_CONFIG.base_url}/alunos/page/search?search=${name}&page=${page}&linesPerPage=${lines}`);
     }
 
     findByEmail(email: string): Observable<StudentDTO>{
       return this.http.get<StudentDTO>(`${API_CONFIG.base_url}/alunos/email?value=${email}`);
+    }
+
+    findById(id: string): Observable<StudentDTO>{
+      return this.http.get<StudentDTO>(`${API_CONFIG.base_url}/alunos/${id}`);
     }
 
 }

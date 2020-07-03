@@ -9,3 +9,7 @@
   font-size: 3rem;
 }
 
+.mat-row:hover {
+  background-color: #303030;
+}
+

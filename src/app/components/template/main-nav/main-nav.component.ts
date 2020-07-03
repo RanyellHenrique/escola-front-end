@@ -1,3 +1,4 @@
+import { StorageService } from '../../../services/storage.service';
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -16,5 +17,11 @@ export class MainNavComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    public storage: StorageService) {}
+
+  logout(): void {
+    this.storage.setLocalUser(null);
+  }
 }

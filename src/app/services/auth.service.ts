@@ -1,10 +1,10 @@
 import { API_CONFIG } from './../config/api.config';
-import { CredentialsDTO } from './../model/credentials';
+import { CredentialsDTO } from './../models/credentials';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
-import { LocalUser } from '../model/local_user';
+import { LocalUser } from '../models/local_user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
