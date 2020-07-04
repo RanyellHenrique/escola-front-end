@@ -32,6 +32,8 @@ import { CourseService } from './services/domain/course.service';
 import { AuthInterceptorProvider } from './interceptors/auth-interceptor';
 import { ErrorInterceptorProvider } from '../app/interceptors/error-interceptor';
 import { reducers, metaReducers } from './reducers';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { reducers, metaReducers } from './reducers';
     HomeComponent,
     LoginComponent,
     CoursesComponent,
-    StudentDetailsComponent
+    StudentDetailsComponent,
+    PaginatorComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

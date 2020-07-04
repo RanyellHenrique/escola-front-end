@@ -10,10 +10,11 @@ import { PageStudents } from '../../../models/students.page';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+
   students: StudentDTO[];
   page: PageStudents = {totalElements: 0, content: [], totalPages: 0, last: false, number: 0, size: 0};
-  searchValue = '';
   displayedColumns: string[] = ['id', 'nome', 'email', 'cpf'];
+  searchValue = '';
 
   constructor(
     public studentsService: StudentService,
@@ -25,26 +26,27 @@ export class StudentsComponent implements OnInit {
       .subscribe(res => {
         this.students = res.content;
         this.page = res;
-      }, err => {});
+      }, error => {});
   }
 
-  search(event: any): void{
-    this.searchValue = event.target.value;
-    this.studentsService.findPerPageAndName(this.page.number, this.page.size, this.searchValue)
-      .subscribe(res => {
-        this.page.totalElements = res.totalElements;
-        this.students = res.content;
-      }, err => {});
+  search(searchValue: string): void{
+    this.searchValue = searchValue;
+    this.studentsService.findPerPageAndName(this.page.number, this.page.size, this.searchValue);
+    this.requestPage(this.page.number, this.page.size);
   }
 
   studentDetails(id: string): void{
     this.router.navigateByUrl('student-details', {state: {studentId: id}});
   }
 
-  public handlePage(e: any): void {
-    this.page.number = e.pageIndex;
-    this.page.size = e.pageSize;
-    this.studentsService.findPerPageAndName(this.page.number, e.pageSize, this.searchValue)
+  handlePage(newPage: PageStudents): void {
+    this.page.number = newPage.number;
+    this.page.size = newPage.size;
+    this.requestPage(this.page.number, this.page.size);
+  }
+
+  requestPage(pageNumber: number, pageSize: number): void{
+    this.studentsService.findPerPageAndName(pageNumber, pageSize, this.searchValue)
       .subscribe(res => {
         this.students = res.content;
       }, error => {});

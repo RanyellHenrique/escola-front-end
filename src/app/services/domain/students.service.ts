@@ -17,11 +17,11 @@ export class StudentService{
     }
 
     findPerPage(page: number = 0, lines: number = 24 ): Observable<PageStudents>{
-      return this.http.get<PageStudents>(`${API_CONFIG.base_url}/alunos/page?page=${page}&linesPerPage=${lines}`);
+      return this.http.get<PageStudents>(`${API_CONFIG.base_url}/alunos/page?page=${page}&linesPerPage=${lines}&orderBy=id`);
     }
 
     findPerPageAndName(page: number = 0, lines: number = 24, name: string ): Observable<PageStudents>{
-      return this.http.get<PageStudents>(`${API_CONFIG.base_url}/alunos/page/search?search=${name}&page=${page}&linesPerPage=${lines}`);
+      return this.http.get<PageStudents>(`${API_CONFIG.base_url}/alunos/page/search?search=${name}&page=${page}&linesPerPage=${lines}&orderBy=id`);
     }
 
     findByEmail(email: string): Observable<StudentDTO>{

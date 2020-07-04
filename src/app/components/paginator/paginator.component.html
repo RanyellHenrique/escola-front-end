@@ -1,0 +1,9 @@
+<div class="row">
+  <mat-paginator
+      (page)="handlePage($event)"
+      [length]="page.totalElements"
+      [pageSize]="page.size"
+      [pageSizeOptions]="[6, 12, 24, 96]"
+      class="col-12">
+  </mat-paginator>
+</div>
