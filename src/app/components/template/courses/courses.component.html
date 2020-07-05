@@ -21,3 +21,5 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
+<app-paginator [page]="page" (newPage)="handlePage($event)"></app-paginator>
+

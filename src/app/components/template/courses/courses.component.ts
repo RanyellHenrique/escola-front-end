@@ -11,29 +11,33 @@ import { PageCourse } from '../../../models/course.page';
 export class CoursesComponent implements OnInit {
 
   courses: CourseDTO[];
-  page: PageCourse = {totalElements: 0, content: [], totalPages: 0, last: false, number: 0, size: 0};
+  page: PageCourse = {totalElements: 0, content: [], totalPages: 0, last: false, number: 0, size: 12};
   displayedColumns: string[] = ['id', 'nome', 'notaMinima', 'cargaHoraria'];
   searchValue = '';
 
   constructor(public courseService: CourseService) { }
 
   ngOnInit(): void {
-    this.courseService.findPerPageAndName(0, 12, this.searchValue)
-      .subscribe(res => {
-       this.courses = res.content;
-       this.page = res;
-      });
+    this.requestPage(this.page.number, this.page.size);
   }
 
   search(searchValue: string): void{
     this.searchValue = searchValue;
-    console.log(this.searchValue);
+    this.page.number = 0;
+    this.requestPage(this.page.number, this.page.size);
+  }
+
+  handlePage(newPage: PageCourse): void {
+    this.page.number = newPage.number;
+    this.page.size = newPage.size;
+    this.requestPage(this.page.number, this.page.size);
   }
 
   requestPage(pageNumber: number, pageSize: number): void {
     this.courseService.findPerPageAndName(pageNumber, pageSize, this.searchValue)
       .subscribe(res => {
         this.courses = res.content;
+        this.page = res;
       }, error => {});
   }
 }

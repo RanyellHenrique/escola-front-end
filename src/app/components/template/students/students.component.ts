@@ -12,7 +12,7 @@ import { PageStudents } from '../../../models/students.page';
 export class StudentsComponent implements OnInit {
 
   students: StudentDTO[];
-  page: PageStudents = {totalElements: 0, content: [], totalPages: 0, last: false, number: 0, size: 0};
+  page: PageStudents = {totalElements: 0, content: [], totalPages: 0, last: false, number: 0, size: 12};
   displayedColumns: string[] = ['id', 'nome', 'email', 'cpf'];
   searchValue = '';
 
@@ -22,16 +22,12 @@ export class StudentsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.studentsService.findPerPage(0, 12)
-      .subscribe(res => {
-        this.students = res.content;
-        this.page = res;
-      }, error => {});
+    this.requestPage(this.page.number, this.page.size);
   }
 
   search(searchValue: string): void{
     this.searchValue = searchValue;
-    this.studentsService.findPerPageAndName(this.page.number, this.page.size, this.searchValue);
+    this.page.number = 0;
     this.requestPage(this.page.number, this.page.size);
   }
 
@@ -49,6 +45,7 @@ export class StudentsComponent implements OnInit {
     this.studentsService.findPerPageAndName(pageNumber, pageSize, this.searchValue)
       .subscribe(res => {
         this.students = res.content;
+        this.page = res;
       }, error => {});
   }
 }
