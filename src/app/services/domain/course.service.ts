@@ -11,6 +11,9 @@ export class CourseService{
     constructor(public http: HttpClient){
 
     }
+    findById(id: string): Observable<CourseDTO>{
+      return this.http.get<CourseDTO>(`${API_CONFIG.base_url}/cursos/${id}`);
+    }
 
     findAll(): Observable<CourseDTO[]>{
       return this.http.get<CourseDTO[]>(`${API_CONFIG.base_url}/cursos`);

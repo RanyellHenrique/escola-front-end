@@ -34,6 +34,7 @@ import { ErrorInterceptorProvider } from '../app/interceptors/error-interceptor'
 import { reducers, metaReducers } from './reducers';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { SearchComponent } from './components/search/search.component';
+import { CourseDetailsComponent } from './components/template/course-details/course-details.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { SearchComponent } from './components/search/search.component';
     CoursesComponent,
     StudentDetailsComponent,
     PaginatorComponent,
-    SearchComponent
+    SearchComponent,
+    CourseDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { CourseService } from '../../../services/domain/course.service';
 import { Component, OnInit } from '@angular/core';
 import { CourseDTO } from '../../../models/course.dto';
 import { PageCourse } from '../../../models/course.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -15,7 +16,9 @@ export class CoursesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'notaMinima', 'cargaHoraria'];
   searchValue = '';
 
-  constructor(public courseService: CourseService) { }
+  constructor(
+    public courseService: CourseService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.requestPage(this.page.number, this.page.size);
@@ -39,5 +42,9 @@ export class CoursesComponent implements OnInit {
         this.courses = res.content;
         this.page = res;
       }, error => {});
+  }
+
+  courseDetails(id: string): void{
+    this.router.navigateByUrl('course-details', {state: {courseId: id}});
   }
 }

@@ -1,3 +1,4 @@
+import { CourseDetailsComponent } from './components/template/course-details/course-details.component';
 import { StudentDetailsComponent } from './components/template/student-details/student-details.component';
 import { CoursesComponent } from './components/template/courses/courses.component';
 import { LoginComponent } from './components/template/login/login.component';
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'student-details',
     component: StudentDetailsComponent
+  },
+  {
+    path: 'course-details',
+    component: CourseDetailsComponent
   }
 ];
 
