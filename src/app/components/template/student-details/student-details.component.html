@@ -1,3 +1,53 @@
-<h1>{{student.nome}}</h1>
-<h2>{{student.email}}</h2>
-<p>{{student.cpf}}</p>
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col margin">
+      <mat-card class="col-12 col-lg ">
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="icon">perm_identity</mat-icon>
+          </div>
+          <mat-card-title>Nome: {{ student.nome}}</mat-card-title>
+          <mat-card-subtitle>E-mail: {{ student.email}}</mat-card-subtitle>
+          <mat-card-subtitle>CPF: {{ student.cpf}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row row-cols-lg-4 row-cols-sm-3">
+    <div *ngFor="let e of student.resultados" class="col-sm col-12 margin">
+      <mat-card  class="col-12 col-sm">
+        <div class="row">
+          <div class="col-9"><h3>{{ e.disciplina.nome | slice: 0:21}}</h3></div>
+          <div class="col-2 button">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">show_chart</mat-icon>
+          </div>
+          <div class="col-12">{{e.disciplina.data | date: 'dd/MM/yyyy'}}</div>
+          <p class="col-12">Nota: {{ e.notaObtida}}</p>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+    <div class="row row-cols-lg-3 row-cols-sm-2">
+      <div class="col-md col-12 margin">
+        <mat-card class="col-12 col-md">
+          <app-chart></app-chart>
+        </mat-card>
+      </div>
+      <div class="col-md col-12 margin">
+        <mat-card class="col-12 col-md">
+          <app-chart></app-chart>
+        </mat-card>
+      </div>
+      <div class="col-md col-12 margin">
+        <mat-card class="col-12 col-md">
+          <app-chart></app-chart>
+        </mat-card>
+      </div>
+    </div>
+
+</div>

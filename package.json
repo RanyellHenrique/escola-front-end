@@ -24,6 +24,7 @@
     "@angular/router": "~10.0.0",
     "@auth0/angular-jwt": "^4.2.0",
     "@ngrx/store": "^9.2.0",
+    "angular-google-charts": "^1.1.4",
     "bootstrap": "^4.5.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

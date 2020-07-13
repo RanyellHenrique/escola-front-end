@@ -1,25 +1,27 @@
-<app-search (searchValue)="search($event)"></app-search>
-
-<table mat-table [dataSource]="courses" class="mat-elevation-z8 col-12 mb-5">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> Id </th>
-    <td mat-cell *matCellDef="let e"> {{e.id}} </td>
-  </ng-container>
-  <ng-container matColumnDef="nome">
-    <th mat-header-cell *matHeaderCellDef> Nome </th>
-    <td mat-cell *matCellDef="let e"> {{e.nome}} </td>
-  </ng-container>
-  <ng-container matColumnDef="notaMinima">
-    <th mat-header-cell *matHeaderCellDef>Nota Minima</th>
-    <td mat-cell *matCellDef="let e"> {{e.notaMinima}} </td>
-  </ng-container>
-  <ng-container matColumnDef="cargaHoraria">
-    <th mat-header-cell *matHeaderCellDef> Carga Horária</th>
-    <td mat-cell *matCellDef="let e"> {{e.cargaHoraria}} hrs</td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="courseDetails(row.id)"></tr>
-</table>
-
-<app-paginator [page]="page" (newPage)="handlePage($event)"></app-paginator>
-
+<div class="row justify-content-center m-lg-1">
+  <app-search (searchValue)="search($event)" class="col-12"></app-search>
+  <table mat-table [dataSource]="courses" class="mat-elevation-z8 col-12">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let e"> {{e.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let e"> {{e.nome}} </td>
+    </ng-container>
+    <ng-container matColumnDef="notaMinima">
+      <th mat-header-cell *matHeaderCellDef>Nota Minima</th>
+      <td mat-cell *matCellDef="let e"> {{e.notaMinima}} </td>
+    </ng-container>
+    <ng-container matColumnDef="cargaHoraria">
+      <th mat-header-cell *matHeaderCellDef> Carga Horária</th>
+      <td mat-cell *matCellDef="let e"> {{e.cargaHoraria}} hrs</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="courseDetails(row.id)"></tr>
+  </table>
+  <app-paginator [page]="page" (newPage)="handlePage($event)" class="col-12 mat-elevation-z8"></app-paginator>
+  <button mat-fab color="primary" class="position-fixed float-right button-position" matTooltip="Add new Course" (click)="addCourse()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

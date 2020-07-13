@@ -13,6 +13,7 @@ export class CourseDetailsComponent implements OnInit {
 
   course: CourseDTO = {  id: '', nome: '', cargaHoraria: '', notaMinima: '', turmas: []};
   id: string;
+  displayedColumns: string[] = ['id', 'data', 'numeroDeVagas'];
 
   constructor(
     private router: Router,

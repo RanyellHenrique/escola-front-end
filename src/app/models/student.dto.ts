@@ -3,4 +3,5 @@ export interface StudentDTO {
   nome: string;
   cpf: string;
   email: string;
+  resultados?: any[];
 }

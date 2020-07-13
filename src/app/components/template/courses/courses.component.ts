@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { CourseDTO } from '../../../models/course.dto';
 import { PageCourse } from '../../../models/course.page';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAddCourseComponent } from '../../dialog-add-course/dialog-add-course.component';
 
 @Component({
   selector: 'app-courses',
@@ -18,7 +20,8 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     public courseService: CourseService,
-    private router: Router) { }
+    private router: Router,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.requestPage(this.page.number, this.page.size);
@@ -46,5 +49,9 @@ export class CoursesComponent implements OnInit {
 
   courseDetails(id: string): void{
     this.router.navigateByUrl('course-details', {state: {courseId: id}});
+  }
+
+  addCourse(): void{
+    this.dialog.open(DialogAddCourseComponent);
   }
 }

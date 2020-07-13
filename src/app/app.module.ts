@@ -14,6 +14,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { MainNavComponent } from './components/template/main-nav/main-nav.component';
@@ -35,7 +39,10 @@ import { reducers, metaReducers } from './reducers';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { SearchComponent } from './components/search/search.component';
 import { CourseDetailsComponent } from './components/template/course-details/course-details.component';
-
+import { GoogleChartsModule } from 'angular-google-charts';
+import { ChartComponent } from './components/chart/chart.component';
+import { DialogAddCourseComponent } from './components/dialog-add-course/dialog-add-course.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -48,13 +55,21 @@ import { CourseDetailsComponent } from './components/template/course-details/cou
     StudentDetailsComponent,
     PaginatorComponent,
     SearchComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    ChartComponent,
+    DialogAddCourseComponent
+  ],
+  entryComponents: [
+    DialogAddCourseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    GoogleChartsModule,
     MatToolbarModule,
+    MatDialogModule,
+    MatDatepickerModule,
     LayoutModule,
     MatButtonModule,
     MatSidenavModule,
@@ -69,7 +84,9 @@ import { CourseDetailsComponent } from './components/template/course-details/cou
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
-    MatTableModule
+    MatTableModule,
+    MatNativeDateModule,
+    MatTooltipModule
   ],
   providers: [
     StudentService,

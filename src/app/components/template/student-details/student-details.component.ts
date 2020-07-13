@@ -12,6 +12,7 @@ export class StudentDetailsComponent implements OnInit {
 
   student: StudentDTO = {id: '', nome: '', email: '', cpf: ''};
   id: string;
+  panelOpenState = false;
 
   constructor(
     private router: Router,
@@ -25,5 +26,4 @@ export class StudentDetailsComponent implements OnInit {
         this.student = res;
       }, error => {});
   }
-
 }
