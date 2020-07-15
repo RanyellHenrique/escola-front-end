@@ -10,7 +10,6 @@ export class PaginatorComponent implements OnInit {
 
   @Input() page: Page;
   @Output() newPage: EventEmitter<Page> = new EventEmitter();
-  @Input() searchValue: string;
 
   constructor() { }
 

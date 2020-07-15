@@ -1,6 +1,6 @@
+import { Observable } from 'rxjs';
 import { CourseService } from '../../../services/domain/course.service';
 import { Component, OnInit } from '@angular/core';
-import { CourseDTO } from '../../../models/course.dto';
 import { PageCourse } from '../../../models/course.page';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,40 +13,27 @@ import { DialogAddCourseComponent } from '../../dialog-add-course/dialog-add-cou
 })
 export class CoursesComponent implements OnInit {
 
-  courses: CourseDTO[];
-  page: PageCourse = {totalElements: 0, content: [], totalPages: 0, last: false, number: 0, size: 12};
   displayedColumns: string[] = ['id', 'nome', 'notaMinima', 'cargaHoraria'];
   searchValue = '';
+  page$: Observable<PageCourse>;
 
   constructor(
     public courseService: CourseService,
-    private router: Router,
+    public router: Router,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.requestPage(this.page.number, this.page.size);
+    this.page$ = this.courseService.findPerPageAndName(this.searchValue);
   }
 
   search(searchValue: string): void{
     this.searchValue = searchValue;
-    this.page.number = 0;
-    this.requestPage(this.page.number, this.page.size);
+    this.page$ = this.courseService.findPerPageAndName(this.searchValue);
   }
 
   handlePage(newPage: PageCourse): void {
-    this.page.number = newPage.number;
-    this.page.size = newPage.size;
-    this.requestPage(this.page.number, this.page.size);
+    this.page$ = this.courseService.findPerPageAndName(this.searchValue, newPage.number, newPage.size);
   }
-
-  requestPage(pageNumber: number, pageSize: number): void {
-    this.courseService.findPerPageAndName(pageNumber, pageSize, this.searchValue)
-      .subscribe(res => {
-        this.courses = res.content;
-        this.page = res;
-      }, error => {});
-  }
-
   courseDetails(id: string): void{
     this.router.navigateByUrl('course-details', {state: {courseId: id}});
   }

@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './components/template/home/home.component';
 import {StudentsComponent} from './components/template/students/students.component';
 import { CommonModule } from '@angular/common';
+import { ClassDetailsComponent } from './components/template/class-details/class-details.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'course-details',
     component: CourseDetailsComponent
+  },
+  {
+    path: 'class-details',
+    component: ClassDetailsComponent
   }
 ];
 

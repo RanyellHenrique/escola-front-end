@@ -1,3 +1,4 @@
+import { ClassService } from './services/domain/class.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +18,8 @@ import { StoreModule } from '@ngrx/store';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -43,6 +46,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { ChartComponent } from './components/chart/chart.component';
 import { DialogAddCourseComponent } from './components/dialog-add-course/dialog-add-course.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DialogAddClassComponent } from './components/dialog-add-class/dialog-add-class.component';
+import { ClassDetailsComponent } from './components/template/class-details/class-details.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +62,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     SearchComponent,
     CourseDetailsComponent,
     ChartComponent,
-    DialogAddCourseComponent
+    DialogAddCourseComponent,
+    DialogAddClassComponent,
+    ClassDetailsComponent
   ],
   entryComponents: [
     DialogAddCourseComponent
@@ -86,7 +93,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     }),
     MatTableModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     StudentService,
@@ -94,7 +102,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     ErrorInterceptorProvider,
     AuthService,
     StorageService,
-    CourseService
+    CourseService,
+    ClassService
   ],
   bootstrap: [AppComponent]
 })
