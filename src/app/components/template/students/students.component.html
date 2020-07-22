@@ -1,5 +1,15 @@
 <div>
-  <app-search (searchValue)="search($event)" class="col-12"></app-search>
+  <mat-form-field class="example-full-width col-12 col-md-12 margin">
+    <mat-label>Name</mat-label>
+    <input
+    matInput
+    placeholder="Press enter for search"
+    name="name"
+    #searchBy
+    autocomplete="off"
+    [(ngModel)]="searchInput"
+    (keyup)="search()">
+  </mat-form-field>
   <div class="row m-lg-1" *ngIf="page$ | async as pag; else loading">
     <table mat-table [dataSource]="pag.content" class="mat-elevation-z8 col-12">
       <ng-container matColumnDef="id">
@@ -19,9 +29,17 @@
         <td mat-cell *matCellDef="let e"> {{e.cpf}} </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="studentDetails(row.id)"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/students/{{row.id}}"></tr>
     </table>
-    <app-paginator [page]="pag" (newPage)="handlePage($event)" class="mat-elevation-z8 col-12"></app-paginator>
+    <mat-paginator
+    [length]="pag.totalElements"
+    [pageSize]="pag.size"
+    [pageIndex]="pag.number"
+    [pageSizeOptions]="[6, 12, 24, 96]"
+    (page)="handlerPage()"
+    #paginator
+    class="col-12 mat-elevation-z8">
+</mat-paginator>
   </div>
   <ng-template #loading>
     <div class="row justify-content-center mt-5">

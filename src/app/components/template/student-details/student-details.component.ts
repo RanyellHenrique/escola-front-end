@@ -1,7 +1,8 @@
+import { Observable } from 'rxjs';
 import { StudentService } from '../../../services/domain/students.service';
 import { StudentDTO } from '../../../models/student.dto';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-student-details',
@@ -10,20 +11,16 @@ import { Router } from '@angular/router';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  student: StudentDTO = {id: '', nome: '', email: '', cpf: ''};
+  student$: Observable<StudentDTO>;
   id: string;
   panelOpenState = false;
 
   constructor(
-    private router: Router,
-    public studentService: StudentService) {
-    this.id = this.router.getCurrentNavigation().extras.state.studentId;
+    public studentService: StudentService,
+    public route: ActivatedRoute) {
    }
 
   ngOnInit(): void {
-    this.studentService.findById(this.id)
-      .subscribe(res => {
-        this.student = res;
-      }, error => {});
+    this.student$ = this.studentService.findById(this.route.snapshot.paramMap.get('id'));
   }
 }

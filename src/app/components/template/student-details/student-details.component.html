@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="student$ |async as student; else loading">
 
   <div class="row">
     <div class="col margin">
@@ -31,23 +31,11 @@
       </mat-card>
     </div>
   </div>
-
-    <div class="row row-cols-lg-3 row-cols-sm-2">
-      <div class="col-md col-12 margin">
-        <mat-card class="col-12 col-md">
-          <app-chart></app-chart>
-        </mat-card>
-      </div>
-      <div class="col-md col-12 margin">
-        <mat-card class="col-12 col-md">
-          <app-chart></app-chart>
-        </mat-card>
-      </div>
-      <div class="col-md col-12 margin">
-        <mat-card class="col-12 col-md">
-          <app-chart></app-chart>
-        </mat-card>
-      </div>
-    </div>
-
+  
 </div>
+
+<ng-template #loading>
+  <div class="row justify-content-center mt-5">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

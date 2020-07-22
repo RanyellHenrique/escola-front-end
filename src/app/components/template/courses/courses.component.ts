@@ -18,8 +18,8 @@ export class CoursesComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
   displayedColumns: string[] = ['id', 'nome', 'notaMinima', 'cargaHoraria'];
   page$: Observable<PageCourse>;
-  searchInput: '';
   handlerPage$: Subject<any> = new Subject<any>();
+  searchInput: '';
 
   constructor(
     public courseService: CourseService,

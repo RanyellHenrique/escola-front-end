@@ -19,7 +19,7 @@ export class DialogAddClassComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.formClass.value);
+
   }
 
 }
