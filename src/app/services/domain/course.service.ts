@@ -19,8 +19,8 @@ export class CourseService{
       return this.http.get<CourseDTO[]>(`${API_CONFIG.base_url}/cursos`);
     }
 
-    findPerPageAndName(name: string, page: number = 0, lines: number = 12): Observable<PageCourse>{
-      return this.http.get<PageCourse>(`${API_CONFIG.base_url}/cursos/page/search?search=${name}&page=${page}&linesPerPage=${lines}&orderBy=id`);
+    findPerPageAndName(name: string = '', page: number = 0, lines: number = 12): Observable<PageCourse>{
+      return this.http.get<PageCourse>(`${API_CONFIG.base_url}/cursos/page/search?search=${name}&page=${page}&linesPerPage=${lines}&orderBy=id&direction=DESC`);
     }
 
     // tslint:disable-next-line: typedef

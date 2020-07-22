@@ -1,10 +1,12 @@
-import { Observable } from 'rxjs';
+import { debounceTime, switchMap} from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 import { CourseService } from '../../../services/domain/course.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PageCourse } from '../../../models/course.page';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddCourseComponent } from '../../dialog-add-course/dialog-add-course.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-courses',
@@ -13,9 +15,11 @@ import { DialogAddCourseComponent } from '../../dialog-add-course/dialog-add-cou
 })
 export class CoursesComponent implements OnInit {
 
+  @ViewChild('paginator') paginator: MatPaginator;
   displayedColumns: string[] = ['id', 'nome', 'notaMinima', 'cargaHoraria'];
-  searchValue = '';
   page$: Observable<PageCourse>;
+  searchInput: '';
+  handlerPage$: Subject<any> = new Subject<any>();
 
   constructor(
     public courseService: CourseService,
@@ -23,22 +27,42 @@ export class CoursesComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.page$ = this.courseService.findPerPageAndName(this.searchValue);
+    this.initial();
   }
 
-  search(searchValue: string): void{
-    this.searchValue = searchValue;
-    this.page$ = this.courseService.findPerPageAndName(this.searchValue);
-  }
-
-  handlePage(newPage: PageCourse): void {
-    this.page$ = this.courseService.findPerPageAndName(this.searchValue, newPage.number, newPage.size);
-  }
-  courseDetails(id: string): void{
-    this.router.navigateByUrl('course-details', {state: {courseId: id}});
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnDestroy(): void {
+    this.handlerPage$.unsubscribe();
   }
 
   addCourse(): void{
-    this.dialog.open(DialogAddCourseComponent);
+    this.dialog.open(DialogAddCourseComponent)
+      .afterClosed()
+      .subscribe(() => this.search());
   }
+
+  initial(): void{
+    this.page$ = this.handlerPage$.pipe(
+      debounceTime(200),
+      switchMap((page) => this.courseService
+        .findPerPageAndName(page.searchInput , page.pageIndex, page.pageSize))
+    );
+  }
+
+  search(): void{
+    this.handlerPage$.next({
+      searchInput: this.searchInput,
+      pageIndex: 0,
+      pageSize: this.paginator ? this.paginator.pageSize : 12
+    });
+  }
+
+  handlerPage(): void{
+    this.handlerPage$.next({
+      searchInput: this.searchInput,
+      pageIndex: this.paginator.pageIndex,
+      pageSize: this.paginator.pageSize
+    });
+  }
+
 }

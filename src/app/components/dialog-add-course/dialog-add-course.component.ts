@@ -1,6 +1,7 @@
 import { CourseService } from './../../services/domain/course.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-add-course',
@@ -11,7 +12,8 @@ export class DialogAddCourseComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    public courseService: CourseService) { }
+    public courseService: CourseService,
+    public router: Router) { }
 
 formCourse = this.formBuilder.group({
   nome: ['', [Validators.required, Validators.minLength(5)]],
@@ -24,7 +26,7 @@ formCourse = this.formBuilder.group({
 
   onSubmit(): void{
     this.courseService.insert(this.formCourse.value).subscribe(res => {
-      console.log(res);
+      this.router.navigateByUrl('/courses');
     }, err => {});
   }
 

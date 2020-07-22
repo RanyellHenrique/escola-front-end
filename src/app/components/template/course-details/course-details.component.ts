@@ -1,7 +1,8 @@
+import { Observable } from 'rxjs';
 import { DialogAddClassComponent } from './../../dialog-add-class/dialog-add-class.component';
 import { CourseService } from './../../../services/domain/course.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CourseDTO } from 'src/app/models/course.dto';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -12,30 +13,21 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CourseDetailsComponent implements OnInit {
 
-  course: CourseDTO = {  id: '', nome: '', cargaHoraria: '', notaMinima: '', turmas: []};
+  course$: Observable<CourseDTO>;
   id: string;
   displayedColumns: string[] = ['id', 'data', 'numeroDeVagas'];
 
   constructor(
-    private router: Router,
     private courseService: CourseService,
-    public dialog: MatDialog) {
-      this.id = this.router.getCurrentNavigation().extras.state.courseId;
-     }
+    public dialog: MatDialog,
+    public route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.courseService.findById(this.id)
-    .subscribe(res => {
-      this.course = res;
-    }, error => {});
+    this.course$ = this.courseService.findById(this.route.snapshot.paramMap.get('id'));
   }
 
   addClass(): void{
       this.dialog.open(DialogAddClassComponent);
-  }
-
-  classDetails(id: string): void{
-    this.router.navigateByUrl('class-details', {state: {classId: id}});
   }
 
 }

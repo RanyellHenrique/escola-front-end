@@ -16,11 +16,11 @@ export class StudentService{
       return this.http.get<StudentDTO[]>(`${API_CONFIG.base_url}/alunos`);
     }
 
-    findPerPage(page: number = 0, lines: number = 24 ): Observable<PageStudents>{
+    findPerPage(page: number = 0, lines: number = 12 ): Observable<PageStudents>{
       return this.http.get<PageStudents>(`${API_CONFIG.base_url}/alunos/page?page=${page}&linesPerPage=${lines}&orderBy=id`);
     }
 
-    findPerPageAndName(page: number = 0, lines: number = 24, name: string ): Observable<PageStudents>{
+    findPerPageAndName(name: string, page: number = 0, lines: number = 12): Observable<PageStudents>{
       return this.http.get<PageStudents>(`${API_CONFIG.base_url}/alunos/page/search?search=${name}&page=${page}&linesPerPage=${lines}&orderBy=id`);
     }
 

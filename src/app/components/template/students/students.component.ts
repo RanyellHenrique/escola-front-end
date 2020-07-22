@@ -1,8 +1,8 @@
 import { StudentService } from '../../../services/domain/students.service';
 import { Component, OnInit } from '@angular/core';
-import { StudentDTO } from '../../../models/student.dto';
 import { Router } from '@angular/router';
 import { PageStudents } from '../../../models/students.page';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-students',
@@ -11,10 +11,9 @@ import { PageStudents } from '../../../models/students.page';
 })
 export class StudentsComponent implements OnInit {
 
-  students: StudentDTO[];
-  page: PageStudents = {totalElements: 0, content: [], totalPages: 0, last: false, number: 0, size: 12};
   displayedColumns: string[] = ['id', 'nome', 'email', 'cpf'];
   searchValue = '';
+  page$: Observable<PageStudents>;
 
   constructor(
     public studentsService: StudentService,
@@ -22,13 +21,12 @@ export class StudentsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.requestPage(this.page.number, this.page.size);
+    this.page$ = this.studentsService.findPerPageAndName(this.searchValue);
   }
 
   search(searchValue: string): void{
     this.searchValue = searchValue;
-    this.page.number = 0;
-    this.requestPage(this.page.number, this.page.size);
+    this.page$ = this.studentsService.findPerPageAndName(this.searchValue);
   }
 
   studentDetails(id: string): void{
@@ -36,16 +34,7 @@ export class StudentsComponent implements OnInit {
   }
 
   handlePage(newPage: PageStudents): void {
-    this.page.number = newPage.number;
-    this.page.size = newPage.size;
-    this.requestPage(this.page.number, this.page.size);
+    this.page$ = this.studentsService.findPerPageAndName(this.searchValue, newPage.number, newPage.size );
   }
 
-  requestPage(pageNumber: number, pageSize: number): void{
-    this.studentsService.findPerPageAndName(pageNumber, pageSize, this.searchValue)
-      .subscribe(res => {
-        this.students = res.content;
-        this.page = res;
-      }, error => {});
-  }
 }
