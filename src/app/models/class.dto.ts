@@ -7,5 +7,5 @@ export interface ClassDTO {
   data: string;
   numeroDeVagas: number;
   disciplinas?: any[];
-  alunos?: StudentDTO[];
+  matriculas?: any[];
 }

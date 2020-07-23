@@ -36,7 +36,7 @@ const routes: Routes = [
     component: CourseDetailsComponent
   },
   {
-    path: 'class-details',
+    path: 'class/:id',
     component: ClassDetailsComponent
   }
 ];
