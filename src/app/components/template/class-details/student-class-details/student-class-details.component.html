@@ -1,0 +1,20 @@
+<div *ngIf="student$ | async as student; else loading">
+  <p>{{student.id}}</p>
+  <p>{{student.nome}}</p>
+  <mat-spinner
+    matBadge="8.5"
+    matBadgeOverlap="true"
+    matBadgePosition="center"
+    matBadgeColor="accent"
+    mode="determinate"
+    value="85"
+    color="accent">
+  </mat-spinner>
+</div>
+
+
+<ng-template class="row" #loading>
+  <div class="row justify-content-center mt-5">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

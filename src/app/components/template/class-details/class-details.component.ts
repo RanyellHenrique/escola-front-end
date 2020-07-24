@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { ClassDTO } from './../../../models/class.dto';
 import { ClassService } from './../../../services/domain/class.service';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-class-details',
@@ -12,14 +12,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ClassDetailsComponent implements OnInit {
 
   classDetails$: Observable<ClassDTO>;
-  id: string;
+  id: any;
 
   constructor(
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private classService: ClassService) {
     }
 
   ngOnInit(): void {
     this.classDetails$ = this.classService.findById(this.route.snapshot.paramMap.get('id'));
+  }
+
+  studentCLick(id: any): void{
+    this.id = id;
   }
 }

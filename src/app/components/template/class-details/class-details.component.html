@@ -8,17 +8,49 @@
       </mat-card-content>
     </mat-card-header>
   </mat-card>
-  <mat-list >
-      <mat-list-item *ngFor="let matricula of classInf.matriculas">
-        <mat-icon mat-list-icon>folder</mat-icon>
-        <div mat-line>{{matricula.aluno.nome}}</div>
-        <div mat-line> {{matricula.aluno.cpf}} </div>
-      </mat-list-item>
-  </mat-list>
-
+  <mat-accordion  class="example-headers-align col-12 mt-2">
+    <mat-expansion-panel
+      *ngFor="let matricula of classInf.matriculas"
+      (click)="studentCLick(matricula.aluno.id)"
+      routerLink="/class/{{classInf.id}}/student/{{matricula.aluno.id}}"
+      >
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{matricula.aluno.id}} - {{matricula.aluno.nome}}</mat-panel-title>
+        <mat-panel-description>{{matricula.aluno.cpf}}
+          <mat-icon color="primary">account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <router-outlet *ngIf=" id === matricula.aluno.id" ></router-outlet>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
+
 <ng-template class="row" #loading>
     <div class="row justify-content-center mt-5">
       <mat-spinner></mat-spinner>
     </div>
 </ng-template>
+
+<!--
+  <mat-card class="col-12 mt-lg-2" >
+    <h2 mat-subheader>Students</h2>
+    <mat-list >
+        <a mat-list-item *ngFor="let matricula of classInf.matriculas">
+          <mat-icon mat-list-icon>person</mat-icon>
+          <div mat-line>{{matricula.aluno.nome}}</div>
+          <div mat-line> {{matricula.aluno.cpf}} </div>
+          <button mat-icon-button>
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <button mat-icon-button color="primary">
+            <mat-icon>info</mat-icon>
+          </button>
+          <button mat-icon-button color="warn">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+          <mat-divider></mat-divider>
+        </a>
+    </mat-list>
+  </mat-card>
+-->

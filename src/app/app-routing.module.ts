@@ -1,3 +1,4 @@
+import { StudentClassDetailsComponent } from './components/template/class-details/student-class-details/student-class-details.component';
 import { CourseDetailsComponent } from './components/template/course-details/course-details.component';
 import { StudentDetailsComponent } from './components/template/student-details/student-details.component';
 import { CoursesComponent } from './components/template/courses/courses.component';
@@ -37,8 +38,14 @@ const routes: Routes = [
   },
   {
     path: 'class/:id',
-    component: ClassDetailsComponent
-  }
+    component: ClassDetailsComponent,
+    children: [
+      {
+        path: 'student/:studentId',
+        component: StudentClassDetailsComponent
+      }
+    ]
+  },
 ];
 
 @NgModule({

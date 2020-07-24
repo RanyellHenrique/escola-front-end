@@ -19,7 +19,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -48,6 +50,7 @@ import { DialogAddCourseComponent } from './components/dialog-add-course/dialog-
 import { MatNativeDateModule } from '@angular/material/core';
 import { DialogAddClassComponent } from './components/dialog-add-class/dialog-add-class.component';
 import { ClassDetailsComponent } from './components/template/class-details/class-details.component';
+import { StudentClassDetailsComponent } from './components/template/class-details/student-class-details/student-class-details.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,8 @@ import { ClassDetailsComponent } from './components/template/class-details/class
     ChartComponent,
     DialogAddCourseComponent,
     DialogAddClassComponent,
-    ClassDetailsComponent
+    ClassDetailsComponent,
+    StudentClassDetailsComponent,
   ],
   entryComponents: [
     DialogAddCourseComponent
@@ -94,7 +98,10 @@ import { ClassDetailsComponent } from './components/template/class-details/class
     MatTableModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatBadgeModule
   ],
   providers: [
     StudentService,
